@@ -22,6 +22,7 @@ public class GoodsTypeController {
     @PostMapping("/loadGoodsType")
     public String showGoodsType() {
         List<GoodsType> goodsTypeList = goodsTypeService.getGoodsTypeList();
+        System.out.println(goodsTypeList);
         return String.valueOf(goodsTypeList);
     }
 }
