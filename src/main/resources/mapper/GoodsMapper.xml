@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.jxc.dao.GoodsDao">
+
+    <resultMap id="listInventoryMap" type="com.atguigu.jxc.entity.Goods">
+        <id column="goods_id" property="goodsId"/>
+        <result column="goods_code" property="goodsCode"/>
+        <result column="goods_name" property="goodsName"/>
+        <result column="inventory_quantity" property="inventoryQuantity"/>
+        <result column="last_purchasing_price" property="lastPurchasingPrice"/>
+        <result column="min_num" property="minNum"/>
+        <result column="goods_model" property="goodsModel"/>
+        <result column="goods_producer" property="goodsProducer"/>
+        <result column="purchasing_price" property="purchasingPrice"/>
+        <result column="remarks" property="remarks"/>
+        <result column="selling_price" property="sellingPrice"/>
+        <result column="state" property="state"/>
+        <result column="goods_unit" property="goodsUnit"/>
+        <result column="goods_type_id" property="goodsTypeId"/>
+        <result column="goods_type_name" property="goodsTypeName"/>
+        <!--        <result column="goods_num" property="saleTotal"/>-->
+        <result column="sale_total" property="saleTotal"/>
+    </resultMap>
+
+    <!--  展示首页信息列表  -->
+    <select id="selectListInventory" resultMap="listInventoryMap">
+        SELECT t_goods.goods_id,
+        t_goods.goods_code,
+        t_goods.goods_name,
+        inventory_quantity,
+        last_purchasing_price,
+        min_num,
+        t_goods.goods_model,
+        goods_producer,
+        purchasing_price,
+        remarks,
+        selling_price,
+        state,
+        t_goods.goods_unit,
+        t_goods.goods_type_id,
+        goods_type_name,
+        (t_sale_list_goods.goods_num - t_customer_return_list_goods.goods_num) sale_total
+        FROM t_goods
+        INNER JOIN t_goods_type ON t_goods.goods_type_id = t_goods_type.goods_type_id
+        LEFT JOIN t_sale_list_goods ON t_goods.goods_id = t_sale_list_goods.goods_id
+        LEFT JOIN t_customer_return_list_goods ON t_goods.goods_id = t_customer_return_list_goods.goods_id
+        <where>
+            <if test="codeOrName != null and codeOrName != ''">
+                and (t_goods.goods_code = #{codeOrName} or t_goods.goods_name like "%"#{codeOrName}"%")
+            </if>
+            <if test="goodsTypeId != null and goodsTypeId != ''">
+                and (t_goods.goods_type_id = #{goodsTypeId})
+            </if>
+        </where>
+        GROUP BY t_goods.goods_code
+        ORDER BY goods_code
+        LIMIT #{page}, #{rows}
+    </select>
+
+</mapper>
