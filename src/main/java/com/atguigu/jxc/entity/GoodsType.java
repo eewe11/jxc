@@ -3,8 +3,6 @@ package com.atguigu.jxc.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * 商品类别
  */
@@ -16,8 +14,6 @@ public class GoodsType {
     private String goodsTypeName;
     private Integer pId;
     private Integer goodsTypeState;
-
-    private List<GoodsType> children;
 
     public GoodsType(String goodsTypeName, Integer goodsTypeState, Integer pId) {
         this.goodsTypeName = goodsTypeName;
