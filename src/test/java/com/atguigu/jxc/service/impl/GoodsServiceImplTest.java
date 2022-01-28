@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GoodsTypeServiceImplTest {
+class GoodsServiceImplTest {
 
     @Test
-    void getGoodsTypeList() {
+    void findListInventory() {
         System.out.println("hello world");
     }
 }
