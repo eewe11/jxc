@@ -54,7 +54,8 @@ public class SupplierServiceImpl implements SupplierService {
                 arrayList.add(i);
             }
             return supplierDao.deleteSupplier(arrayList);
+        } else {
+            throw new RuntimeException();
         }
-        return null;
     }
 }

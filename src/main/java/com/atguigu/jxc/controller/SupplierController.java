@@ -35,15 +35,13 @@ public class SupplierController {
     public ServiceVO save(Supplier supplier, HttpServletRequest request) {
         String supplierId = request.getParameter("supplierId");
         supplierService.saveSupplier(supplierId, supplier);
-        return new ServiceVO(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS, null);
+        return new ServiceVO(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
     }
 
     // 删除供应商
     @PostMapping("/delete")
     public ServiceVO deleteSupplier(String ids) {
-        if (supplierService.removeSupplier(ids) > 0) {
-            return new ServiceVO(100, "请求成功", null);
-        }
-        return new ServiceVO(101, "请求失败, 请联系管理员", null);
+        supplierService.removeSupplier(ids);
+        return new ServiceVO(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
     }
 }

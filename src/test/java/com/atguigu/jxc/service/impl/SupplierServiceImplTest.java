@@ -13,6 +13,8 @@ class SupplierServiceImplTest {
     private SupplierDao dao;
 
     @Test
-    void testSupplierService() {
+    void testSupplierRemove() {
+        //Integer integer = dao.deleteSupplier(null);
+        //System.out.println(integer);
     }
 }
