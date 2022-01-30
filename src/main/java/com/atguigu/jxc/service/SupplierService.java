@@ -13,7 +13,7 @@ public interface SupplierService {
     Map<String, Object> findSupplierList(Integer page, Integer rows, String supplierName);
 
     // 供应商添加或修改
-    Integer saveSupplier(Supplier supplier);
+    void saveSupplier(String supplierId, Supplier supplier);
 
     // 删除供应商(支持批量删除)
     Integer removeSupplier(String ids);

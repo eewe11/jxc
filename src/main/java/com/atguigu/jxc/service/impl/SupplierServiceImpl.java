@@ -33,13 +33,13 @@ public class SupplierServiceImpl implements SupplierService {
 
     // 供应商添加或修改
     @Override
-    public Integer saveSupplier(Supplier supplier) {
+    public void saveSupplier(String supplierId, Supplier supplier) {
         // 已存在的供应商
-        Supplier oldSupplier = supplierDao.selectSupplierById(supplier.getSupplierId());
+        Supplier oldSupplier = supplierDao.selectSupplierById(supplierId);
         if (oldSupplier != null) {
-            return supplierDao.updateSupplier(supplier);
+            supplierDao.updateSupplier(supplier);
         } else {
-            return supplierDao.insertSupplier(supplier);
+            supplierDao.insertSupplier(supplier);
         }
     }
 

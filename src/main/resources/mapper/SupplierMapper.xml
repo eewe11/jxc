@@ -34,9 +34,10 @@
     </select>
 
     <!-- 新增供应商信息  -->
-    <insert id="insertSupplier" parameterType="com.atguigu.jxc.entity.Supplier">
-        INSERT INTO t_supplier (supplier_id, supplier_name, contacts, phone_number, address, remarks)
-        VALUES (#{supplierId}, #{supplierName}, #{contacts}, #{phoneNumber}, #{address}, #{remarks})
+    <insert id="insertSupplier" parameterType="com.atguigu.jxc.entity.Supplier" useGeneratedKeys="true"
+            keyProperty="supplierId">
+        INSERT INTO t_supplier (supplier_name, contacts, phone_number, address, remarks)
+        VALUES (#{supplierName}, #{contacts}, #{phoneNumber}, #{address}, #{remarks})
     </insert>
 
     <!--  修改供应商信息  -->

@@ -16,7 +16,7 @@ public interface SupplierDao {
                                       @Param("supplierName") String supplierName);
 
     // 根据 supplier_id 查询供应商信息
-    Supplier selectSupplierById(Integer supplierId);
+    Supplier selectSupplierById(String supplierId);
 
     // 新增供应商
     Integer insertSupplier(Supplier supplier);
