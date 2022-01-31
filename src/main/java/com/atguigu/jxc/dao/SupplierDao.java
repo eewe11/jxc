@@ -19,10 +19,10 @@ public interface SupplierDao {
     Supplier selectSupplierById(String supplierId);
 
     // 新增供应商
-    Integer insertSupplier(Supplier supplier);
+    void insertSupplier(Supplier supplier);
 
     // 修改供应商信息
-    Integer updateSupplier(Supplier supplier);
+    void updateSupplier(Supplier supplier);
 
     // 删除供应商
     Integer deleteSupplier(@Param("ids") List<Integer> ids);

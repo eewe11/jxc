@@ -45,7 +45,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     // 删除供应商(支持批量)
     @Override
-    public Integer removeSupplier(String ids) {
+    public Integer removeSupplier(String ids) {  // ids形式: 12, 13, 14,...
         List<Integer> arrayList = new ArrayList<>();
         if (!StringUtils.isEmpty(ids)) {
             String[] idList = ids.split(",");
