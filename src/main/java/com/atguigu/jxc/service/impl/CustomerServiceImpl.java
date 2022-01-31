@@ -27,22 +27,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     // 客户添加或者修改
     @Override
-    public Integer saveCustomer(Customer customer) {
-        if (customer != null) {
-            Customer oldCustomer = customerDao.selectCustomerById(customer.getCustomerId());
-            // 已存在客户
-            if (oldCustomer != null) {
-                return customerDao.updateCustomer(customer);
-            } else {
-                return customerDao.insertCustomer(customer);
-            }
+    public void saveCustomer(String customId, Customer customer) {
+        Customer oldCustomer = customerDao.selectCustomerById(customId);
+        if (oldCustomer!=null) {
+            customerDao.updateCustomer(customer);
+        }else {
+            customerDao.insertCustomer(customer);
         }
-        return null;
     }
 
     // 删除客户
     @Override
-    public Integer removeCustomer(String ids) {
+    public void removeCustomer(String ids) {
         List<Integer> numList = new ArrayList<>();
         if (!StringUtils.isEmpty(ids)) {
             String[] numStr = ids.split(",");
@@ -50,8 +46,9 @@ public class CustomerServiceImpl implements CustomerService {
                 int i = Integer.parseInt(num);
                 numList.add(i);
             }
-            return customerDao.deleteCustomer(numList);
+            customerDao.deleteCustomer(numList);
+        } else {
+            throw new RuntimeException();
         }
-        return null;
     }
 }

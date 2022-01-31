@@ -1,6 +1,7 @@
 package com.atguigu.jxc.controller;
 
 import com.atguigu.jxc.domain.ServiceVO;
+import com.atguigu.jxc.domain.SuccessCode;
 import com.atguigu.jxc.entity.Customer;
 import com.atguigu.jxc.service.CustomerService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// 客户管理
 @RestController
 @RequestMapping("/customer")
 public class CustomerController {
@@ -19,6 +22,7 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
+    // 客户分页查询
     @PostMapping("/list")
     public Map<String, Object> list(Integer page,
                                     Integer rows,
@@ -31,20 +35,15 @@ public class CustomerController {
     }
 
     @PostMapping("/save")
-    public ServiceVO save(Customer customer) {
-        Integer integer = customerService.saveCustomer(customer);
-        if (integer > 0) {
-            return new ServiceVO(100, "请求成功", null);
-        }
-        return new ServiceVO(101, "请求失败, 请联系管理员", null);
+    public ServiceVO save(Customer customer, HttpServletRequest request) {
+        String customerId = request.getParameter("customerId");
+        customerService.saveCustomer(customerId, customer);
+        return new ServiceVO(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
     }
 
     @PostMapping("/delete")
     public ServiceVO delete(String ids) {
-        Integer integer = customerService.removeCustomer(ids);
-        if (integer > 0) {
-            return new ServiceVO(100, "请求成功", null);
-        }
-        return new ServiceVO(101, "请求失败, 请联系管理员", null);
+        customerService.removeCustomer(ids);
+        return new ServiceVO(SuccessCode.SUCCESS_CODE, SuccessCode.SUCCESS_MESS);
     }
 }

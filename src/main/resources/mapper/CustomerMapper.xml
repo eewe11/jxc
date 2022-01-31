@@ -34,7 +34,7 @@
     </select>
 
     <!--  新增客户信息 -->
-    <insert id="insertCustomer" parameterType="com.atguigu.jxc.entity.Customer">
+    <insert id="insertCustomer" parameterType="com.atguigu.jxc.entity.Customer" useGeneratedKeys="true" keyProperty="customerId">
         INSERT INTO t_customer (customer_name, contacts, phone_number, address, remarks)
         VALUES (#{customerName}, #{contacts}, #{phoneNumber}, #{address}, #{remarks})
     </insert>

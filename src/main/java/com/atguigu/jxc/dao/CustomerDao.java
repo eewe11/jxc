@@ -16,14 +16,14 @@ public interface CustomerDao {
                                       @Param("customerName") String customerName);
 
     // 根据 customer_id 查询客户
-    Customer selectCustomerById(Integer customer_id);
+    Customer selectCustomerById(String customer_id);
 
     // 客户添加
-    Integer insertCustomer(Customer customer);
+    void insertCustomer(Customer customer);
 
     // 客户修改
-    Integer updateCustomer(Customer customer);
+    void updateCustomer(Customer customer);
 
     // 客户删除
-    Integer deleteCustomer(@Param("ids") List<Integer> ids);
+    void deleteCustomer(@Param("ids") List<Integer> ids);
 }

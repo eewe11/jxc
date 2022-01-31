@@ -13,8 +13,8 @@ public interface CustomerService {
     List<Customer> findCustomerList(Integer page, Integer rows, String customerName);
 
     // 客户添加或修改
-    Integer saveCustomer(Customer customer);
+    void saveCustomer(String customerId,Customer customer);
 
     // 删除客户
-    Integer removeCustomer(String ids);
+    void removeCustomer(String ids);
 }
