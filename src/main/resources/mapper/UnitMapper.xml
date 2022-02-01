@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 商品单位管理 -->
+<mapper namespace="com.atguigu.jxc.dao.UnitDao">
+
+    <!--获取商品单位信息-->
+    <select id="selectUnitList" resultType="com.atguigu.jxc.entity.Unit">
+        SELECT unit_id unitId,
+               unit_name unitName
+        FROM t_unit
+    </select>
+</mapper>

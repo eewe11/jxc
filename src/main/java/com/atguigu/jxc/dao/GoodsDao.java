@@ -15,4 +15,8 @@ public interface GoodsDao {
                                     @Param("rows") Integer rows,
                                     @Param("codeOrName") String codeOrName,
                                     @Param("goodsTypeId") Integer goodsTypeId);
+
+    // 商品管理所有商品信息分页展示()
+    List<Goods> selectListByGoodsNameOrGoodsType(Integer page, Integer rows, String goodsName, Integer goodsTypeId);
+
 }

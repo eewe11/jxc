@@ -17,6 +17,7 @@ public class GoodsTypeController {
     @Resource
     private GoodsTypeService goodsTypeService;
 
+    // 商品分类树展示
     @PostMapping("/loadGoodsType")
     public String showGoodsType() {
         return goodsTypeService.getGoodsTypeList();

@@ -11,10 +11,12 @@ public class IndexController {
 
     /**
      * 进入登录页面
+     *
      * @return 重定向至登录页面
      */
     @GetMapping("/")
-    public String toIndex(){
+    public String toIndex() {
         return "redirect:login.html";
     }
+
 }

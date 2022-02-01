@@ -21,13 +21,13 @@
         <result column="goods_unit" property="goodsUnit"/>
         <result column="goods_type_id" property="goodsTypeId"/>
         <result column="goods_type_name" property="goodsTypeName"/>
-        <!--        <result column="goods_num" property="saleTotal"/>-->
         <result column="sale_total" property="saleTotal"/>
     </resultMap>
 
     <!--  展示首页信息列表  -->
     <select id="selectListInventory" resultMap="listInventoryMap">
-        SELECT t_goods.goods_id,
+        SELECT
+        t_goods.goods_id,
         t_goods.goods_code,
         t_goods.goods_name,
         inventory_quantity,
@@ -57,6 +57,38 @@
         </where>
         GROUP BY t_goods.goods_code
         ORDER BY goods_code
+        LIMIT #{page}, #{rows}
+    </select>
+
+
+    <!-- 查询所有商品信息（可以根据分类、名称查询）-->
+    <select id="selectListByGoodsNameOrGoodsType" resultType="com.atguigu.jxc.entity.Goods">
+        SELECT
+        t_goods.goods_id goodsId,
+        t_goods.goods_code goodsCode,
+        t_goods.goods_name goodsName,
+        inventory_quantity inventoryQuantity,
+        last_purchasing_price lastPurchasingPrice,
+        min_num minNum,
+        t_goods.goods_model goodsModel,
+        goods_producer goodsProducer,
+        purchasing_price purchasingPrice,
+        remarks,
+        selling_price sellingPrice,
+        state,
+        t_goods.goods_unit goodsUnit,
+        t_goods.goods_type_id goodsTypeId,
+        goods_type_name goodsTypeName
+        FROM t_goods
+        INNER JOIN t_goods_type ON t_goods.goods_type_id = t_goods_type.goods_type_id
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                and (t_goods.goods_name = #{goodsName}) or (t_goods.goods_name like "%"#{goodsName}"%")
+            </if>
+            <if test="goodsTypeId != null and goodsTypeId != ''">
+                and (t_goods.goods_type_id = #{goodsTypeId}) or (t_goods.goods_type_id = #{goodsTypeId})
+            </if>
+        </where>
         LIMIT #{page}, #{rows}
     </select>
 
